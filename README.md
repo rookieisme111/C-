@@ -3,5 +3,5 @@
 ***
 
 1. markdown的简单使用
-2. git
+2. git的使用
 
