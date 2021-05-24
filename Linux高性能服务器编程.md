@@ -134,8 +134,31 @@
 > 客户端而言，socket选项应该在调用connect前设置<br>
 > ~一些常用的socket选项~
 
-11. 
+11. **网络信息api**
+> 一些常用的网络信息api,如从主机名得到ip地址，从服务名得到端口号
+   * **gethostbyname和gethostbyaddr**
+   > 前者根据主机名获得主机信息，后者通过ip地址获取主机信息，其系统调用
+   > ```
+   > #include <netdb.h>
+   > struct hostent* gethostbyname(const char* name);
+   > struct hostent* gethostbyaddr(const void* addr, size_t len, int type);
+   > ```
+   > name指定主机名，addr指定主机的ip地址，len指定ip地址的长度，type指定ip类型（使用地址组类型）
 
+   * **getservbyname和getservbyport**
+   >> 前者通过服务名获取服务的信息，后者通过端口号获取服务的信息，系统调用定义
+   >> ```
+   >> #include <netdb.h>
+   >> struct servent* getservbyname(const char* name, const char* proto);
+   >> struct servent* getservbyport(int port, const char* proto);
+   >> ```
+   >> **以上四个函数都是不可重入的，即非线程安全的，给出了重入版本，在函数名后加_r(re-entrant)** 
+   
+   * ~**getaddrinfo**~
+   >> 通过主机名获取ip地址，通过服务名获得端口号
+
+   * ~**getnameinfo**~
+   >> 通过socket地址获取主机名和服务名
 
 
 
