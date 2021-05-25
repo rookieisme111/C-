@@ -128,7 +128,12 @@
 > #include <fcntl.h>
 > int fcntl( int fd, int cmd, ...);
 > ```
-> 
+> fd参数表明需要控制的文件描述符，cmd则是需要执行的具体操作，根据cmd的类型还有第三个可选的参数<br>
+> 常用的cmd操作的功能：<br>
+> * **F_DUPFD和F_DUPFD_CLOEXEC**:复制文件描述符，其值大于等于arg
+> * **F_GETFD和F_SETFD**：获取或者设置文件描述符的标志
+> * **F_GETFL和F_SETFL**：获取和设置文件描述符的状态标志
+> * **F_GETPIPE_SZ和F_SETPIPE_SZ**:获取和设置管道的容量
 
 
 
