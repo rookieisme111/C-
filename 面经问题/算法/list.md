@@ -125,4 +125,100 @@ bool hasCycle(ListNode *head) {
 
  ```
  10. **如果存在环，求出环上节点数量**
- 
+ * 从入口节点出发，再次回答入口节点经过的步数
+ * 从相遇点出发，再次回到相遇的点的距离
+
+ 11. **环形链表的长度**
+ * 头节点到入口节点的长度+环的长度
+
+ 12. **判断一个链表是回文的（O（1）的空间复杂度）**
+ * 首先找到链表的中点（快慢指针），然后将后半段的链表逆序，对两个链表进行比较，如果对应位置相等，则为回文链表
+ ```
+class Solution {
+public:
+  bool isPalindrome(ListNode* head) {
+      if (head == NULL && head->next == NULL)
+          return true;
+
+      ListNode* fast = head,*slow = head;
+      while (fast!=NULL && fast->next!=NULL){     //这种判断条件，奇数个节点时slow停在中点，偶数个节点时slow停在后半链表的头节点
+          slow = slow->next;                      //fast->next && fast->next->next 这种判断条件，奇数个节点时slow停在中点，偶数个节点时停在前半链表的尾节点
+          fast = fast->next->next;
+      }
+
+      ListNode* new_head = reverseList(slow),*tmp = new_head;
+
+      while (head && new_head ){
+          if (head->val!=new_head->val)
+              return false;
+          head = head->next;
+          new_head = new_head->next;
+      }
+      reverseList(tmp);
+      return true;
+  }
+
+  ListNode* reverseList(ListNode* head){
+      if ( head==NULL && head->next==NULL){
+          return head;
+      }
+      ListNode* prev = NULL, *tmp;
+      while(head){
+          tmp = head->next;
+          head->next = prev;
+          prev = head;
+          head = tmp;
+      }
+      return prev;
+  }
+};
+ ```
+13. **83.删除升序链表中重复的节点**
+```
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (!head || head->next == NULL)
+            return head;
+        ListNode* fast = head->next,*slow = head;
+        while (fast){
+            if (fast->val == slow->val){
+                slow->next = fast->next;
+                delete(fast);
+                fast = slow->next;
+            }
+            else{
+                slow = fast;
+                fast = fast->next;
+            }
+
+        }
+        return head;
+    }
+```
+
+14. **将一个链表进行重排，原奇数节点排在所有偶数节点的前面**
+
+15. **删除链表中倒数第k个节点**
+* 快慢指针+哑节点
+```
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* prev = dummy,*first,*second;
+        first = second = head;
+        while(n-->0){
+            first = first->next;
+        }
+        while(first){
+            first = first->next;
+            prev = second;
+            second = second->next;
+        }
+
+        prev->next = second->next;
+        delete second;
+        return dummy->next;
+    }
+```
+
+16. **排序链表，O（nlogn）的时间复杂度**
+* 归并排序+合并两个有序链表+找链表的中点
