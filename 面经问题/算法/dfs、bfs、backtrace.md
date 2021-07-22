@@ -39,9 +39,10 @@
             print(cur->val);
             prev = cur ;
             cur = nullptr;
-            continue;
         }
-        stack1.push(cur);
-        cur = cur->right;
+        else{
+            stack1.push(cur);
+            cur = cur->right;
+        }
     }
 ```
