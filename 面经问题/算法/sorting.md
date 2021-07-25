@@ -175,7 +175,37 @@ public:
 };
 ```
 6. **堆排序**
+```
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        buildMaxHeap(nums);
+        for (int i=nums.size()-1;i>0;i--){
+            swap(nums[0],nums[i]);
+            maxHeapAdjust(nums,0,i);
+        }
+        return nums;
+    }
 
+    void buildMaxHeap(vector<int>& nums){
+        for (int i = nums.size()/2-1;i>=0;i--)
+            maxHeapAdjust(nums,i,nums.size());
+    }
+
+    void maxHeapAdjust(vector<int>& nums,int i,int heapsize){
+        int left = 2*i+1,right = left+1;
+        int max_index = i ;
+        if (left<heapsize)
+            max_index = nums[left]>nums[max_index]?left:max_index;
+        if (right<heapsize)
+            max_index = nums[right]>nums[max_index]?right:max_index;
+        if (max_index!=i){
+            swap(nums[i],nums[max_index]);
+            maxHeapAdjust(nums,max_index,heapsize);
+        }
+    }
+};
+```
 7. **希尔排序**
 
 8. **基数排序**
