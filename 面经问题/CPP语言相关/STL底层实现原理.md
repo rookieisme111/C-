@@ -1,6 +1,7 @@
 # 对STL常用的几个容器，进行源码级的解读
 
 1. **vector的实现，简单说一下**
+> vector主要使用了三个指针来管理一片连续的内存，start指向内存的起始位置，end指向最后一个元素的下一个位置，end_of_storge指向整片内存空间的下一个位置，当原始内存空间不足时，会进行动态扩容，以支持更多的元素。
 2. **vector的扩容机制**
 3. **vector的push_back()的过程，和emplace_back()的区别**
 4. **vector的erase，remove原理和区别**
