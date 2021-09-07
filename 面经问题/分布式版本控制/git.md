@@ -7,3 +7,5 @@
 5. **创建分支、切换分支、合并分支**
 6. **保存现场 stash list apply drop pop **
 7. **推送和拉取 push和pull**
+
+8. **说一说merge和rebase的区别**
